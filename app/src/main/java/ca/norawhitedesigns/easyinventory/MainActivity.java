@@ -1,8 +1,8 @@
 package ca.norawhitedesigns.easyinventory;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends RuntimePermission implements View.OnClickListener {
 
     private CompoundButton autoFocus;
     private CompoundButton useFlash;
@@ -20,12 +20,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
+    private static final int REQUEST_PERMISSION = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        requestAppPermissions(new String[]{Manifest.permission.CAMERA}, R.string.msg, REQUEST_PERMISSION);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode) {
         statusMessage = (TextView)findViewById(R.id.status_message);
         barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
@@ -42,7 +48,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, BarcodeCaptureActivity.class);
             intent.putExtra(BarcodeCaptureActivity.AutoFocus, autoFocus.isChecked());
             intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash.isChecked());
-
             startActivityForResult(intent, RC_BARCODE_CAPTURE);
         }
     }

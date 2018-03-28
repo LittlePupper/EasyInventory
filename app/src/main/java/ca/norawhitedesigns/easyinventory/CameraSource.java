@@ -15,7 +15,6 @@
  */
 package ca.norawhitedesigns.easyinventory;
 
-import android.app.Activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -29,14 +28,14 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringDef;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-
+import android.content.pm.PackageManager;
 
 import com.google.android.gms.common.images.Size;
 import com.google.android.gms.vision.Detector;
@@ -56,7 +55,7 @@ import java.util.Map;
 // storing images.
 
 @SuppressWarnings("deprecation")
-public class CameraSource extends AppCompatActivity {
+public class CameraSource extends RuntimePermission {
     @SuppressLint("InlinedApi")
     public static final int CAMERA_FACING_BACK = CameraInfo.CAMERA_FACING_BACK;
     @SuppressLint("InlinedApi")
@@ -67,6 +66,7 @@ public class CameraSource extends AppCompatActivity {
     private static final int DUMMY_TEXTURE_NAME = 100;
 
     private static final float ASPECT_RATIO_TOLERANCE = 0.01f;
+    private static final int REQUEST_PERMISSION = 10;
 
     @StringDef({
         Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE,
@@ -77,6 +77,7 @@ public class CameraSource extends AppCompatActivity {
         Camera.Parameters.FOCUS_MODE_INFINITY,
         Camera.Parameters.FOCUS_MODE_MACRO
     })
+
     @Retention(RetentionPolicy.SOURCE)
     private @interface FocusMode {}
 
@@ -87,6 +88,7 @@ public class CameraSource extends AppCompatActivity {
         Camera.Parameters.FLASH_MODE_RED_EYE,
         Camera.Parameters.FLASH_MODE_TORCH
     })
+
     @Retention(RetentionPolicy.SOURCE)
     private @interface FlashMode {}
 
@@ -196,6 +198,11 @@ public class CameraSource extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onPermissionsGranted(int requestCode) {
+
+    }
+
     //==============================================================================================
     // Bridge Functionality for the Camera1 API
     //==============================================================================================
@@ -283,11 +290,11 @@ public class CameraSource extends AppCompatActivity {
     public CameraSource start() throws IOException {
         synchronized (mCameraLock) {
             if (mCamera != null) {
-                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
-                        == PackageManager.PERMISSION_DENIED) {
-                    ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, requestCode);
-                }
-                return this;
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestAppPermissions(new String[]{Manifest.permission.CAMERA}, R.string.msg, REQUEST_PERMISSION);
+                } else
+                    return this;
             }
 
             mCamera = createCamera();
@@ -321,7 +328,11 @@ public class CameraSource extends AppCompatActivity {
     public CameraSource start(SurfaceHolder surfaceHolder) throws IOException {
         synchronized (mCameraLock) {
             if (mCamera != null) {
-                return this;
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    requestAppPermissions(new String[]{Manifest.permission.CAMERA}, R.string.msg, REQUEST_PERMISSION);
+                } else
+                    return this;
             }
 
             mCamera = createCamera();
