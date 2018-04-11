@@ -7,7 +7,6 @@
     <include
         layout="@layout/action_bar"
         android:id="@+id/actionbar">
-
     </include>
 
     <SurfaceView
