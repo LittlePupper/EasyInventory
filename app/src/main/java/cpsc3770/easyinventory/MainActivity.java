@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 
     public void scanBarcode(View v) {
         Intent intent = new Intent(this, ScanBarcodeActivity.class);
+//        startActivity(intent);
         startActivityForResult(intent, 0);
     }
 
@@ -34,6 +35,9 @@ public class MainActivity extends Activity {
                 if(data!=null) {
                     Barcode barcode = data.getParcelableExtra("barcode");
                     barcodeResult.setText("Barcode value: " + barcode.displayValue);
+                    Intent intent = new Intent(this, ConfirmationActivity.class);
+                    intent.putExtra("barcode", barcode.displayValue);
+                    startActivity(intent);
                 } else {
                     barcodeResult.setText("No barcode found");
                 }

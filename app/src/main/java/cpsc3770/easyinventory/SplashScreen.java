@@ -13,7 +13,7 @@ public class SplashScreen extends Activity {
         EasySplashScreen config = new EasySplashScreen(SplashScreen.this)
                 .withFullScreen()
                 .withTargetActivity(MainActivity.class)
-                .withSplashTimeOut(5000)
+                .withSplashTimeOut(1000)
                 .withBackgroundColor(Color.parseColor("#2699FB"))
                 .withBeforeLogoText("Easy Inventory");
 

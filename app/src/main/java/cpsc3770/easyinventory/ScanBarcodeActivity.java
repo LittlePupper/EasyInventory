@@ -86,9 +86,12 @@ public class ScanBarcodeActivity extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes=detections.getDetectedItems();
                 if(barcodes.size()>0) {
-                    Intent intent=new Intent();
+//                    Intent intent = new Intent(getBaseContext(),ConfirmationActivity.class);
+                    Intent intent = new Intent();
                     intent.putExtra("barcode", barcodes.valueAt(0)); // Get latest barcode from the array
                     setResult(CommonStatusCodes.SUCCESS, intent);
+//                    startActivity(intent);
+
                     finish();
                 }
             }
