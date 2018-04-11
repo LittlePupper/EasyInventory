@@ -27,4 +27,6 @@ dependencies {
 
     // Add mobile Vision dependency
     implementation 'com.google.android.gms:play-services-vision:12.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:27.1.+'
 }
