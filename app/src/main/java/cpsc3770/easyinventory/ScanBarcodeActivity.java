@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,7 +21,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
-public class ScanBarcodeActivity extends Activity {
+public class ScanBarcodeActivity extends AppCompatActivity {
 
     SurfaceView cameraPreview;
     private static final int MY_PERMISSION_REQUEST_CAMERA = 2569;
@@ -28,7 +30,8 @@ public class ScanBarcodeActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_barcode);
-
+        Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
+        setSupportActionBar(toolbar);
         cameraPreview = (SurfaceView)findViewById(R.id.camera_preview);
         createCameraSource();
     }
