@@ -1,4 +1,4 @@
-package ca.norawhitedesigns.easyinventory;
+package cpsc3770.easyinventory;
 
 import org.junit.Test;
 

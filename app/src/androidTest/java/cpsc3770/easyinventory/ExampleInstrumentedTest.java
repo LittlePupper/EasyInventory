@@ -1,4 +1,4 @@
-package ca.norawhitedesigns.easyinventory;
+package cpsc3770.easyinventory;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ca.norawhitedesigns.easyinventory", appContext.getPackageName());
+        assertEquals("cpsc3770.easyinventory", appContext.getPackageName());
     }
 }
