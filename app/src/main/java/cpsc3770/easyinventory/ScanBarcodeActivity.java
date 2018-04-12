@@ -1,6 +1,7 @@
 package cpsc3770.easyinventory;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,9 +25,12 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 
     SurfaceView cameraPreview;
     private static final int MY_PERMISSION_REQUEST_CAMERA = 2569;
+//    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+//        context = this;
 
         // Set layout
         super.onCreate(savedInstanceState);
@@ -96,13 +100,10 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 //            public void receiveDetections(Detector.Detections<Barcode> detections) {
 //                final SparseArray<Barcode> barcodes=detections.getDetectedItems();
 //                if(barcodes.size()>0) {
-//                    Intent intent = new Intent(getBaseContext(),ConfirmationActivity.class);
-////                    Intent intent = new Intent();
+//                    Intent intent = new Intent(context, ConfirmationActivity.class);
 //                    intent.putExtra("barcode", barcodes.valueAt(0)); // Get latest barcode from the array
-////                    setResult(CommonStatusCodes.SUCCESS, intent);
 //                    startActivity(intent);
-//
-//                    finish();
+////                    finish();
 //                }
 //            }
         });

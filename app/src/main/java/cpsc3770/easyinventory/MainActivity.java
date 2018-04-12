@@ -54,10 +54,4 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-//    public void scanBarcode(View v) {
-//        Intent intent = new Intent(this, ScanBarcodeActivity.class);
-//        startActivity(intent);
-//    }
-
 }

@@ -1,7 +1,5 @@
 package cpsc3770.easyinventory;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -17,6 +15,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
+
+    public AsyncResponse delegate;
 
     @Override
     protected String doInBackground(String... voids) {
@@ -83,10 +83,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         void processFinish(String output);
     }
 
-    public AsyncResponse delegate = null;
-
     public BackgroundWorker(AsyncResponse delegate) {
         this.delegate = delegate;
     }
-
 }
