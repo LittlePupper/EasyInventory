@@ -1,6 +1,5 @@
 package cpsc3770.easyinventory;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +17,8 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
     private TextView textViewStock;
     private Button buttonModifyStock;
 
+    String[] productInfo;
+
     protected void onCreate (Bundle savedInstanceState) {
 
         // Set layout
@@ -29,7 +30,7 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
         setSupportActionBar(toolbar);
 
         // Get layout elements
-        textViewName = findViewById(R.id.name);
+        textViewName = findViewById(R.id.textViewName);
         textViewSize = findViewById(R.id.size);
         textViewDescription = findViewById(R.id.description);
         textViewPrice = findViewById(R.id.price);
@@ -38,23 +39,26 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
 
         // Get data from intent
         Intent intent = getIntent();
-        String[] productInfo = intent.getStringArrayExtra("productInfo");
+        productInfo = intent.getStringArrayExtra("productInfo");
         textViewName.setText(productInfo[1]);
+        textViewPrice.setText("$" + productInfo[2]);
         textViewSize.setText(productInfo[3] + " " + productInfo[4]);
         textViewDescription.setText(productInfo[5]);
-        textViewPrice.setText("$" + productInfo[2]);
         textViewStock.setText(productInfo[6]);
     }
 
-//    private class EditItemDialog extends DialogFragment
-
     public void openDialog(View v) {
+        Bundle args = new Bundle();
+        args.putString("productName", productInfo[1]);
+        args.putString("stock", productInfo[6]);
         EditItemDialog editItemDialog = new EditItemDialog();
+        editItemDialog.setArguments(args);
         editItemDialog.show(getSupportFragmentManager(), "Edit item dialog");
     }
 
     @Override
-    public void applyTexts(String name) {
-        textViewName.setText(name);
+    public void applyStockChange(String stock) {
+
+//        textViewStock.setText(stock);
     }
 }
