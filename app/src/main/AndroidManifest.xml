@@ -23,7 +23,7 @@
             android:value="barcode" />
 
         <activity android:name="cpsc3770.easyinventory.SplashScreen"
-            android:label="Splash Screen">
+            android:label="Easy Inventory">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
