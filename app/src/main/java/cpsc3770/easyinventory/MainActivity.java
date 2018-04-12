@@ -3,20 +3,29 @@ package cpsc3770.easyinventory;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     TextView barcodeResult;
 
     protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        // Set layout
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create toolbar
+        Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
+        setSupportActionBar(toolbar);
+
+        // Set barcode results
         barcodeResult = (TextView)findViewById(R.id.barcode_result);
     }
 
@@ -24,7 +33,6 @@ public class MainActivity extends Activity {
 
     public void scanBarcode(View v) {
         Intent intent = new Intent(this, ScanBarcodeActivity.class);
-//        startActivity(intent);
         startActivityForResult(intent, 0);
     }
 
@@ -46,4 +54,10 @@ public class MainActivity extends Activity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+//    public void scanBarcode(View v) {
+//        Intent intent = new Intent(this, ScanBarcodeActivity.class);
+//        startActivity(intent);
+//    }
+
 }

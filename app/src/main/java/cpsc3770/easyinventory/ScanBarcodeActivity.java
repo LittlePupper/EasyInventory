@@ -27,10 +27,16 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        // Set layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_barcode);
+
+        // Create toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
         setSupportActionBar(toolbar);
+
+        // Start the camera preview
         cameraPreview = (SurfaceView)findViewById(R.id.camera_preview);
         createCameraSource();
     }
@@ -47,13 +53,6 @@ public class ScanBarcodeActivity extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder holder) {
 
                 if (ActivityCompat.checkSelfPermission(ScanBarcodeActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                     ActivityCompat.requestPermissions(ScanBarcodeActivity.this, new String[]{Manifest.permission.CAMERA},
                             MY_PERMISSION_REQUEST_CAMERA);
                     return;
@@ -86,15 +85,26 @@ public class ScanBarcodeActivity extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes=detections.getDetectedItems();
                 if(barcodes.size()>0) {
-//                    Intent intent = new Intent(getBaseContext(),ConfirmationActivity.class);
                     Intent intent = new Intent();
                     intent.putExtra("barcode", barcodes.valueAt(0)); // Get latest barcode from the array
                     setResult(CommonStatusCodes.SUCCESS, intent);
-//                    startActivity(intent);
-
                     finish();
                 }
             }
+
+//            @Override
+//            public void receiveDetections(Detector.Detections<Barcode> detections) {
+//                final SparseArray<Barcode> barcodes=detections.getDetectedItems();
+//                if(barcodes.size()>0) {
+//                    Intent intent = new Intent(getBaseContext(),ConfirmationActivity.class);
+////                    Intent intent = new Intent();
+//                    intent.putExtra("barcode", barcodes.valueAt(0)); // Get latest barcode from the array
+////                    setResult(CommonStatusCodes.SUCCESS, intent);
+//                    startActivity(intent);
+//
+//                    finish();
+//                }
+//            }
         });
     }
 }

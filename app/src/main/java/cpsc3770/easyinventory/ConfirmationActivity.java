@@ -9,14 +9,15 @@ import android.widget.TextView;
 public class ConfirmationActivity extends Activity {
 
     protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        // Set layout
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_confirmation);
+
+        // Get data from scanner (intent)
         Intent intent = getIntent();
         String result = intent.getStringExtra("barcode");
-
         TextView barcodeResult;
-
-        setContentView(R.layout.activity_confirmation);
         barcodeResult = (TextView)findViewById(R.id.itemName);
         barcodeResult.setText(result);
     }

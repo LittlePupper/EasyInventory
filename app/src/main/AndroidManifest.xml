@@ -31,7 +31,7 @@
         </activity>
 
         <activity android:name="cpsc3770.easyinventory.MainActivity"
-            android:label="Main Activity">
+            android:label="Main activity">
 
         </activity>
 
