@@ -18,13 +18,6 @@ import java.net.URLEncoder;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
-    Context context;
-    AlertDialog alertDialog;
-
-    BackgroundWorker (Context cxt) {
-        context = cxt;
-    }
-
     @Override
     protected String doInBackground(String... voids) {
         String type = voids[0];
@@ -73,8 +66,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Product");
+
     }
 
     @Override
@@ -84,7 +76,17 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        delegate.processFinish(result);
     }
+
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
+
+    public AsyncResponse delegate = null;
+
+    public BackgroundWorker(AsyncResponse delegate) {
+        this.delegate = delegate;
+    }
+
 }

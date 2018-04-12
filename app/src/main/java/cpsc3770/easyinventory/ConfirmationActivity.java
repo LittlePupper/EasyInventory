@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class ConfirmationActivity extends Activity {
-
-    Context context = this;
+public class ConfirmationActivity extends Activity implements BackgroundWorker.AsyncResponse {
 
     protected void onCreate (Bundle savedInstanceState) {
 
@@ -24,18 +22,21 @@ public class ConfirmationActivity extends Activity {
         String type = "findProduct";
 
         // Create the MySQL accessor
+        new BackgroundWorker(this).execute(type, productID);
 
-        BackgroundWorker backgroundWorker = new BackgroundWorker(context);
-        backgroundWorker.execute(type, productID);
 
-        TextView barcodeResult;
-        barcodeResult = (TextView)findViewById(R.id.itemName);
-        barcodeResult.setText(productID);
     }
 
     public void viewItem(View v) {
         Intent intent = new Intent(this, ViewItemActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void processFinish(String output) {
+        TextView barcodeResult;
+        barcodeResult = (TextView)findViewById(R.id.itemName);
+        barcodeResult.setText(output);
     }
 
 //    public void scanAgain() {
