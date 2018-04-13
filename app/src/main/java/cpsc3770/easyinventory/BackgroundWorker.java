@@ -22,7 +22,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... voids) {
         String type = voids[0];
-        String ipaddress = "http://192.168.0.23/";
+        String ipaddress = "http://192.168.0.10/";
         String getProduct_url = ipaddress + "getproduct.php";
         String updateStock_url = ipaddress + "updatestock.php";
         String getAll_url = ipaddress + "getall.php";
@@ -114,7 +114,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                     String productName = voids[2];
                     String price = voids[3];
                     String size = voids[4];
-                    String units = voids[5];
+                    String unit = voids[5];
                     String description = voids[6];
                     URL url = new URL(updateProduct_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -129,7 +129,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                             +URLEncoder.encode("productName", "UTF-8")+"="+URLEncoder.encode(productName, "UTF-8")+"&"
                             +URLEncoder.encode("price", "UTF-8")+"="+URLEncoder.encode(price, "UTF-8")+"&"
                             +URLEncoder.encode("size", "UTF-8")+"="+URLEncoder.encode(size, "UTF-8")+"&"
-                            +URLEncoder.encode("units", "UTF-8")+"="+URLEncoder.encode(units, "UTF-8")+"&"
+                            +URLEncoder.encode("unit", "UTF-8")+"="+URLEncoder.encode(unit, "UTF-8")+"&"
                             +URLEncoder.encode("description", "UTF-8")+"="+URLEncoder.encode(description, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
@@ -144,6 +144,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                     while((line = bufferedReader.readLine()) != null) {
                         result+=line;
                     }
+                    Log.e("result", result);
                     bufferedReader.close();
                     is.close();
                     httpURLConnection.disconnect();
