@@ -3,13 +3,16 @@ package cpsc3770.easyinventory;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -51,6 +54,7 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
 
         // Change listener on the edit text stock field
         editTextStock = view.findViewById(R.id.editTextStock);
+        editTextStock.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
         editTextStock.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {   }
@@ -128,7 +132,7 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
                 // Adding to stock
                 newStockValue = originalStockInt + Integer.parseInt(editTextStock.getText().toString());
             }
-            textViewNewStockValue.setText("New stock is " + newStockValue);
+            textViewNewStockValue.setText(Html.fromHtml("New stock is <b>" + newStockValue+"</b>"));
         } else {
             textViewNewStockValue.setText("No change to stock");
         }

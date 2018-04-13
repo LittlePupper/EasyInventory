@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.CameraSource;
@@ -25,12 +27,13 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 
     SurfaceView cameraPreview;
     private static final int MY_PERMISSION_REQUEST_CAMERA = 2569;
-//    Context context;
+    Context context;
+    private TextView toolbarTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-//        context = this;
+        context = this;
 
         // Set layout
         super.onCreate(savedInstanceState);
@@ -38,7 +41,21 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 
         // Create toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText("Scan a QR code");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            // Starts main activity and finishes this one
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // Start the camera preview
         cameraPreview = (SurfaceView)findViewById(R.id.camera_preview);
@@ -95,17 +112,6 @@ public class ScanBarcodeActivity extends AppCompatActivity {
                     finish();
                 }
             }
-
-//            @Override
-//            public void receiveDetections(Detector.Detections<Barcode> detections) {
-//                final SparseArray<Barcode> barcodes=detections.getDetectedItems();
-//                if(barcodes.size()>0) {
-//                    Intent intent = new Intent(context, ConfirmationActivity.class);
-//                    intent.putExtra("barcode", barcodes.valueAt(0)); // Get latest barcode from the array
-//                    startActivity(intent);
-////                    finish();
-//                }
-//            }
         });
     }
 }

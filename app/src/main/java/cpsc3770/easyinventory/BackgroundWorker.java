@@ -27,6 +27,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         String updateStock_url = ipaddress + "updatestock.php";
         String getAll_url = ipaddress + "getall.php";
         String updateProduct_url = ipaddress + "updateproduct.php";
+        String deleteProduct_url = ipaddress + "deleteProduct.php";
 
         switch(type) {
             case "findProduct" :
@@ -181,6 +182,44 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                         result+=line;
                     }
                     Log.e("My Result", result);
+                    bufferedReader.close();
+                    is.close();
+                    httpURLConnection.disconnect();
+
+                    // Return result from server
+                    return result;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "deleteProduct" :
+                try {
+                    String productID = voids[1];
+                    URL url = new URL(deleteProduct_url);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+
+                    // Output to server
+                    OutputStream os = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    String post_data = URLEncoder.encode("productID", "UTF-8")+"="+URLEncoder.encode(productID, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    os.close();
+
+                    // Input from server
+                    InputStream is = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "ISO-8859-1"));
+                    String result = "";
+                    String line;
+                    while((line = bufferedReader.readLine()) != null) {
+                        result+=line;
+                    }
                     bufferedReader.close();
                     is.close();
                     httpURLConnection.disconnect();

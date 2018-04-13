@@ -30,30 +30,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="cpsc3770.easyinventory.MainActivity"
-            android:label="Main activity">
+        <activity android:name="cpsc3770.easyinventory.MainActivity"></activity>
 
-        </activity>
+        <activity android:name="cpsc3770.easyinventory.ScanBarcodeActivity"></activity>
 
-        <activity android:name="cpsc3770.easyinventory.ScanBarcodeActivity"
-            android:label="Scan a QR Code">
+        <activity android:name="cpsc3770.easyinventory.ConfirmationActivity"></activity>
 
-        </activity>
+        <activity android:name="cpsc3770.easyinventory.ViewItemActivity"></activity>
 
-        <activity android:name="cpsc3770.easyinventory.ConfirmationActivity"
-            android:label="Confirmation">
-
-        </activity>
-
-        <activity android:name="cpsc3770.easyinventory.ViewItemActivity"
-            android:label="View item">
-
-        </activity>
-
-        <activity android:name="cpsc3770.easyinventory.EditItemActivity"
-            android:label="EditItem">
-
-        </activity>
+        <activity android:name="cpsc3770.easyinventory.EditItemActivity"></activity>
 
     </application>
 </manifest>
