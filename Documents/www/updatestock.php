@@ -1,15 +1,11 @@
 <?php
 	require "conn.php";
-	// $productID = $_POST["productID"];
-	// $newStock = $_POST["newStock"]
-	$productID = 3;
-	$newStock = 40;
+	$productID = $_POST["productID"];
+	$newStock = $_POST["newStock"];
 	$stmt = "UPDATE Product SET Stock = $newStock WHERE ProductID = $productID;";
-	$stmt->execute();
-	if($stmt->affected_rows === -1) {
-	    echo 'Stock update failed';
+	if($conn->query($stmt) === FALSE) {
+	    echo "Stock update failed";
 	} else {
-	    echo 'Stock updated';
+	    echo "Stock updated";
     }
-	$stmt->close();
 ?>
