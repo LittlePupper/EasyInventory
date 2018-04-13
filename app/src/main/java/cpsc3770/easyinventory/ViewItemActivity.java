@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.CommonStatusCodes;
+
 public class ViewItemActivity extends AppCompatActivity implements EditItemDialog.EditItemDialogListener {
 
     private TextView textViewName;
@@ -16,10 +18,9 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
     private TextView textViewPrice;
     private TextView textViewStock;
     private Button buttonModifyStock;
-
-    String[] productInfo;
-
+    private String[] productInfo;
     private String productID;
+    private Intent intent;
 
     protected void onCreate (Bundle savedInstanceState) {
 
@@ -50,20 +51,43 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
         textViewStock.setText(productInfo[6]);
     }
 
-    public void openDialog(View v) {
+    @Override
+    public void applyStockChange(int newStockValue) {
+        textViewStock.setText(Integer.toString(newStockValue));
+    }
+
+    // On click for the "Modify Stock" button
+    public void modifyStock(View v) {
         Bundle args = new Bundle();
         args.putString("productID", productID);
         args.putString("productName", productInfo[1]);
-        args.putString("stock", productInfo[6]);
+        args.putString("stock", textViewStock.getText().toString());
         EditItemDialog editItemDialog = new EditItemDialog();
         editItemDialog.setArguments(args);
         editItemDialog.show(getSupportFragmentManager(), "Edit item dialog");
     }
 
+    // On click for the "Edit product" button
+    public void editItem(View v) {
+        Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("productInfo", productInfo);
+        startActivityForResult(intent, 0);
+    }
+
+    // When EditItemActivity returns results
     @Override
-    public void applyStockChange(String stock) {
-        textViewStock.setText(stock);
-//        finish();
-//        startActivity(getIntent());
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==0) {
+            if(resultCode == CommonStatusCodes.SUCCESS) {
+                if(data!=null) {
+                    textViewName.setText(data.getStringExtra("productName"));
+                    textViewPrice.setText(data.getStringExtra("price"));
+                    textViewSize.setText(data.getStringExtra("size") + " " + data.getStringExtra("unit"));
+                    textViewDescription.setText(data.getStringExtra("description"));
+                } else {
+                    return;
+                }
+            }
+        }
     }
 }
