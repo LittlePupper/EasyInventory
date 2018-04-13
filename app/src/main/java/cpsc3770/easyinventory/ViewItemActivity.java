@@ -19,6 +19,8 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
 
     String[] productInfo;
 
+    private String productID;
+
     protected void onCreate (Bundle savedInstanceState) {
 
         // Set layout
@@ -40,6 +42,7 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
         // Get data from intent
         Intent intent = getIntent();
         productInfo = intent.getStringArrayExtra("productInfo");
+        productID = productInfo[0];
         textViewName.setText(productInfo[1]);
         textViewPrice.setText("$" + productInfo[2]);
         textViewSize.setText(productInfo[3] + " " + productInfo[4]);
@@ -49,6 +52,7 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
 
     public void openDialog(View v) {
         Bundle args = new Bundle();
+        args.putString("productID", productID);
         args.putString("productName", productInfo[1]);
         args.putString("stock", productInfo[6]);
         EditItemDialog editItemDialog = new EditItemDialog();
@@ -58,7 +62,8 @@ public class ViewItemActivity extends AppCompatActivity implements EditItemDialo
 
     @Override
     public void applyStockChange(String stock) {
-
-//        textViewStock.setText(stock);
+        textViewStock.setText(stock);
+//        finish();
+//        startActivity(getIntent());
     }
 }

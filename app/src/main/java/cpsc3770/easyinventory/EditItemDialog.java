@@ -22,17 +22,20 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
     private TextView textViewNewStockValue;
     private EditText editTextStock;
     private EditItemDialogListener listener;
+    private String productID;
     private String productName;
     private String originalStockString;
     private int originalStockInt;
     private int newStockValue;
     private Switch addTakeSwitch;
     private boolean takeFromStock = true;
+    private String databaseResult = "";
 
     @Override
     public Dialog onCreateDialog (Bundle savedInstanceState) {
 
         //Initialize
+        productID = getArguments().getString("productID", "0");
         productName = getArguments().getString("productName", "Product name");
         originalStockString = getArguments().getString("stock", "0");
         originalStockInt = Integer.parseInt(originalStockString);
@@ -87,11 +90,8 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String type = "updateStock";
-
-                        // Create the MySQL accessor
-//                        new BackgroundWorker(getContext()).execute(type, textViewName.toString(), Integer.toString(newStockValue));
-                        listener.applyStockChange(Integer.toString(newStockValue));
+                        updateDatabase();
+                        listener.applyStockChange(databaseResult);
                     }
                 });
 
@@ -110,13 +110,15 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
 
     @Override
     public void processFinish(String output) {
-
+        databaseResult = output;
     }
 
+    // Does a thing in the calling activity (ViewItemActivity)
     public interface EditItemDialogListener {
         void applyStockChange(String stock);
     }
 
+    // Updates the new stock value text view
     private void updateStockTextView () {
         if (!editTextStock.getText().toString().matches("")) {
             if (takeFromStock) {
@@ -130,5 +132,12 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
         } else {
             textViewNewStockValue.setText("No change to stock");
         }
+    }
+
+    private void updateDatabase() {
+        String type = "updateStock";
+
+        // Create the MySQL accessor
+        new BackgroundWorker(this).execute(type, productID, Integer.toString(newStockValue));
     }
 }
