@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -14,12 +15,18 @@ import com.google.android.gms.vision.barcode.Barcode;
 public class MainActivity extends AppCompatActivity {
 
     TextView barcodeResult;
+    ListView myListView;
 
     protected void onCreate (Bundle savedInstanceState) {
 
         // Set layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Get listview setup
+        myListView = (ListView) findViewById(R.id.listView);
+
+//        myListView.
 
         // Create toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
