@@ -13,10 +13,17 @@
     <string name="edit_product">Edit product</string>
     <string name="no_stock_change">No change to stock</string>
     <string name="product_name">Product name</string>
-    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
-    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
-    <string name="barcode_success">Barcode read successfully</string>
-    <string name="barcode_failure">No barcode captured</string>
-    <string name="barcode_error">"Error reading barcode: %1$s"</string>
-    <string name="msg">Please enable all permissions</string>
+
+
+    <string name="price">Price</string>
+    <string name="volume">Volume</string>
+    <string name="description">Description</string>
+
+    <string-array name="units_array">
+        <item>mL</item>
+        <item>L</item>
+        <item>g</item>
+        <item>kg</item>
+    </string-array>
+
 </resources>

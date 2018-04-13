@@ -91,7 +91,7 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         updateDatabase();
-                        listener.applyStockChange(databaseResult);
+                        listener.applyStockChange(newStockValue);
                     }
                 });
 
@@ -115,7 +115,7 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
 
     // Does a thing in the calling activity (ViewItemActivity)
     public interface EditItemDialogListener {
-        void applyStockChange(String stock);
+        void applyStockChange(int newStockValue);
     }
 
     // Updates the new stock value text view

@@ -8,6 +8,20 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/editProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="editItem"
+        android:src="@drawable/ic_edit_white_24dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewName" />
+
     <include
         layout="@layout/action_bar"
         android:id="@+id/actionbar">
@@ -23,13 +37,16 @@
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="265dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/editProduct"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -90,18 +107,21 @@
 
     <TextView
         android:id="@+id/stock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="289dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/stockLabel"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Button
         android:id="@+id/modifyStockButton"
-        android:onClick="openDialog"
+        android:onClick="modifyStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
