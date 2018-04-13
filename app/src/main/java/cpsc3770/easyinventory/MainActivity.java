@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundWorker.
     IceCreamAdapter iceCreamAdapter;
     ArrayList<IceCream> iceCreamList;
     Context context;
+    String toast;
 
     protected void onCreate (Bundle savedInstanceState) {
 
@@ -46,24 +49,42 @@ public class MainActivity extends AppCompatActivity implements BackgroundWorker.
 
         // Create toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
+        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText("Easy Inventory");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.ic_photo_camera_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            // Starts main activity and finishes this one
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ScanBarcodeActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         // Set barcode results
         barcodeResult = (TextView)findViewById(R.id.barcode_result);
+
+        if(getIntent().getExtras()!=null){
+            toast = getIntent().getStringExtra("deletedProduct") + " successfully deleted";
+            Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_LONG).show();
+        }
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_edit_item, menu);
+//        return true;
+//    }
 
     @Override
     public void onResume()
     {  // After a pause OR at startup
         super.onResume();
         getAll();
-    }
-
-    /* Click event for barcode scan button */
-
-    public void scanBarcode(View v) {
-        Intent intent = new Intent(this, ScanBarcodeActivity.class);
-        startActivityForResult(intent, 0);
     }
 
     @Override

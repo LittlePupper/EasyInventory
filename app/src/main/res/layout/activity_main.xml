@@ -8,13 +8,6 @@
         android:id="@+id/actionbar">
     </include>
 
-    <Button
-        android:id="@+id/scan_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/scan_barcode"
-        android:onClick="scanBarcode" />
-
     <TextView
         android:id="@+id/barcode_result"
         android:layout_width="match_parent"

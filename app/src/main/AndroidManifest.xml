@@ -1,22 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cpsc3770.easyinventory">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+    <application android:allowBackup="true"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <!-- android:theme="@style/AppTheme" -->
+        <!--android:theme="@style/AppTheme"-->
 
-
-        <!-- Add mobile vision dependencies and version to metadata -->
+        <!--Add mobile vision dependencies and version to metadata-->
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -25,34 +22,25 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity
-            android:name=".SplashScreen"
+        <activity android:name="cpsc3770.easyinventory.SplashScreen"
             android:label="Easy Inventory">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="Main activity"></activity>
-        <activity
-            android:name=".ScanBarcodeActivity"
-            android:label="Scan a QR Code"></activity>
-        <activity
-            android:name=".ConfirmationActivity"
-            android:label="Confirmation"></activity>
-        <activity
-            android:name=".ViewItemActivity"
-            android:label="View Item"></activity>
-        <activity
-            android:name=".EditItemActivity"
-            android:label="Edit Item"></activity>
-        <activity
-            android:name=".CreateItemActivity"
-            android:label="Create Item"
-            ></activity>
-    </application>
 
+        <activity android:name="cpsc3770.easyinventory.MainActivity"></activity>
+
+        <activity android:name="cpsc3770.easyinventory.ScanBarcodeActivity"></activity>
+
+        <activity android:name="cpsc3770.easyinventory.ConfirmationActivity"></activity>
+
+        <activity android:name="cpsc3770.easyinventory.ViewItemActivity"></activity>
+
+        <activity android:name="cpsc3770.easyinventory.EditItemActivity"></activity>
+
+        <activity android:name="cpsc3770.easyinventory.CreateItemActivity"></activity>
+
+    </application>
 </manifest>

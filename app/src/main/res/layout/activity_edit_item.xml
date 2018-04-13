@@ -67,6 +67,8 @@
             android:hint="Really good icecream"
             android:inputType="textPersonName"
             android:textColor="@color/textgrey"
+            android:textColorLink="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewNameLabel" />
@@ -92,6 +94,8 @@
             android:hint="This is really good icecream."
             android:inputType="textMultiLine"
             android:textColor="@color/textgrey"
+            android:textColorLink="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionLabel" />
@@ -104,6 +108,8 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:textColor="@color/textgrey"
+            android:textColorLink="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
             app:layout_constraintStart_toEndOf="@+id/editTextPrice"
             app:layout_constraintTop_toBottomOf="@+id/textViewSizeLabel" />
 
@@ -124,35 +130,13 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:textColor="@color/textgrey"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            android:textColorLink="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/edit_text_cursor"
+            app:layout_constraintStart_toEndOf="@+id/dollar"
             app:layout_constraintTop_toBottomOf="@+id/textViewPriceLabel" />
 
-        <Button
-            android:id="@+id/buttonSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:background="@color/colorPrimaryDark"
-            android:onClick="updateProduct"
-            android:text="Submit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
-
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="32dp"
-            android:background="@color/red"
-            android:onClick="deleteProduct"
-            android:text="Delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
-
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/dollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

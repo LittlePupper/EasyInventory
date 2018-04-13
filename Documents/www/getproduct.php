@@ -8,6 +8,6 @@
 			echo $row['ProductID'] . '~' . $row['ProductName'] . '~' . $row['Price'] . '~' . $row['Size'] . '~' . $row['Unit'] . '~' . $row['Description'] . '~' . $row['Stock'];
 		}			
 	} else {
-		echo "No products found";
+		echo $productID;
 	}
 ?>
