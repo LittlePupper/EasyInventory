@@ -1,15 +1,20 @@
 package cpsc3770.easyinventory;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 
@@ -31,7 +36,19 @@ public class CreateItemActivity extends AppCompatActivity implements BackgroundW
 
         // Create toolbar
         Toolbar toolbar = (Toolbar)findViewById(R.id.actionbar);
+        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText("Create new product");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(CommonStatusCodes.INTERRUPTED, intent);
+                finish();
+            }
+        });
 
         // Get layout elements
         editTextName = findViewById(R.id.editTextName);
@@ -55,8 +72,30 @@ public class CreateItemActivity extends AppCompatActivity implements BackgroundW
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_create_item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.Submit) {
+            createProduct();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     // Submit changes of product to database
-    public void createProduct(View v) {
+    public void createProduct() {
         String type = "createProduct";
         int errorCount = 0;
 

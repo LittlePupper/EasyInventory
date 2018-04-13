@@ -127,6 +127,21 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
         if (!editTextStock.getText().toString().matches("")) {
             if (takeFromStock) {
                 // Taking from stock
+                if ((originalStockInt -Integer.parseInt(editTextStock.getText().toString())<0)) {
+                    AlertDialog d = (AlertDialog) getDialog();
+                    if (d != null) {
+                        Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+                        positiveButton.setEnabled(false);
+                        textViewNewStockValue.setTextColor(getResources().getColor(R.color.red));
+                    }
+                } else {
+                    AlertDialog d = (AlertDialog) getDialog();
+                    if (d != null) {
+                        Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+                        positiveButton.setEnabled(true);
+                        textViewNewStockValue.setTextColor(getResources().getColor(R.color.textgrey));
+                    }
+                }
                 newStockValue = originalStockInt - Integer.parseInt(editTextStock.getText().toString());
             } else {
                 // Adding to stock

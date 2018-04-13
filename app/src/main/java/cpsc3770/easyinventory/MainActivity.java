@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BackgroundWorker.AsyncResponse{
 
-    TextView barcodeResult;
     ListView myListView;
     IceCreamAdapter iceCreamAdapter;
     ArrayList<IceCream> iceCreamList;
@@ -64,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundWorker.
             }
         });
 
-        // Set barcode results
-        barcodeResult = (TextView)findViewById(R.id.barcode_result);
-
         if(getIntent().getExtras()!=null){
             toast = getIntent().getStringExtra("deletedProduct") + " successfully deleted";
             Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_LONG).show();
@@ -93,12 +89,9 @@ public class MainActivity extends AppCompatActivity implements BackgroundWorker.
             if(resultCode == CommonStatusCodes.SUCCESS) {
                 if(data!=null) {
                     Barcode barcode = data.getParcelableExtra("barcode");
-                    barcodeResult.setText("Barcode value: " + barcode.displayValue);
                     Intent intent = new Intent(this, ConfirmationActivity.class);
                     intent.putExtra("barcode", barcode.displayValue);
                     startActivity(intent);
-                } else {
-                    barcodeResult.setText("No barcode found");
                 }
             }
         } else {
