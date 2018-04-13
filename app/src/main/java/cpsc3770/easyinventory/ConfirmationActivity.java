@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+
+import java.text.ParseException;
 
 public class ConfirmationActivity extends Activity implements BackgroundWorker.AsyncResponse {
 
@@ -19,8 +22,6 @@ public class ConfirmationActivity extends Activity implements BackgroundWorker.A
 
         // Set layout
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmation);
-        barcodeResult = (TextView)findViewById(R.id.itemName);
 
         // Get data from scanner (intent)
         Intent intent = getIntent();
@@ -46,7 +47,26 @@ public class ConfirmationActivity extends Activity implements BackgroundWorker.A
     @Override
     public void processFinish(String output) {
         productInfo = output.split("~");
-        barcodeResult.setText(productInfo[1]);
+
+        try{
+            Integer.parseInt(productInfo[0]);
+
+            if(productInfo.length > 1) {
+                setContentView(R.layout.activity_confirmation);
+                barcodeResult = (TextView)findViewById(R.id.itemName);
+                barcodeResult.setText(productInfo[1]);
+
+            }
+            else{
+                finish();
+                Intent intent = new Intent(this, CreateItemActivity.class);
+                intent.putExtra("newProductID", productInfo[0]);
+                startActivity(intent);
+            }
+
+        }catch(Exception e) {
+            Log.e("Scan", "This QR code is not compatible with this system.");
+        }
     }
 
     public void scanAgain(View v) {
