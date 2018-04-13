@@ -6,6 +6,6 @@
 	if($conn->query($stmt) === FALSE) {
 	    echo "Stock update failed";
 	} else {
-	    echo "Stock updated";
+	    echo "Updated";
     }
 ?>

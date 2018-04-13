@@ -146,6 +146,12 @@ public class EditItemDialog extends AppCompatDialogFragment implements Backgroun
             } else {
                 // Adding to stock
                 newStockValue = originalStockInt + Integer.parseInt(editTextStock.getText().toString());
+                AlertDialog d = (AlertDialog) getDialog();
+                if (d != null) {
+                    Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+                    positiveButton.setEnabled(true);
+                    textViewNewStockValue.setTextColor(getResources().getColor(R.color.textgrey));
+                }
             }
             textViewNewStockValue.setText(Html.fromHtml("New stock is <b>" + newStockValue+"</b>"));
         } else {

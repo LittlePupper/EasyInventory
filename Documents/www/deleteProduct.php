@@ -5,6 +5,6 @@
 	if($conn->query($stmt) === FALSE) {
 	    echo "Delete failed";
 	} else {
-	    echo "Delete succeeded";
+	    echo "Deleted";
     }
 ?>

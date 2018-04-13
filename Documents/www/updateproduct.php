@@ -10,6 +10,6 @@
 	if($conn->query($stmt) === FALSE) {
 	    echo "Product update failed";
 	} else {
-	    echo "Product updated";
+	    echo "Updated";
     }
 ?>
